@@ -25,7 +25,7 @@ void	ft_sorter(char **str)
 	if (str == NULL)
 		return ;
 	p = 1;
-	while (str[p][0] != '\0')
+	while (str[p])
 	{
 		k = ft_strcmp(str[p - 1], str[p]);
 		if (k > 0)
