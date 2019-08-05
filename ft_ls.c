@@ -25,13 +25,12 @@ void	ft_sorter(char **str)
 	if (str == NULL)
 		return ;
 	p = 1;
-	while (str[p])
+	while (str[p][0] != '\0')
 	{
 		k = ft_strcmp(str[p - 1], str[p]);
-		printf("%d\n", k);
 		if (k > 0)
 		{
-			ft_array_swapper(str[p], str[p - 1]);
+			ft_array_swapper(str[p - 1], str[p]);
 			p = 0;
 		}
 		p++;
@@ -78,7 +77,7 @@ int		main(int argc, char **argv)
 		ft_strcpy(st[p], pDirent->d_name);
 		p++;
 	}
-	st[p] = '\0';
+	st[p][0] = '\0';
 	ft_sorter(st);
 	p = 0;
 	while (st[p])
@@ -88,9 +87,11 @@ int		main(int argc, char **argv)
 		else
 		{
 			ft_putstr(st[p]);
+			ft_putchar(' ');
+			//ft_putnbr(ft_strcmp(st[p], st[p + 1]));
+			ft_putchar(' ');
 			//ft_putchar(' ');
-			//ft_putnbr(ft_strlen(st[p]));
-			ft_putchar('\t');
+			ft_putchar(' ');
 			p++;
 		}
 	}
