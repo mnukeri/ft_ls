@@ -17,9 +17,6 @@ void	ft_array_swapper(char *st1, char *st2)
 	free(temp);
 }
 
-//When tested on the MAC, it prints alphabetcially as the OG_ls. so do not stress yourself further, in that regard;
-//G_N_L is supposed to be before ft_ls;
-//It seems uppercase is supposed to be before lowercase, we're printing according to ascii decimal order;
 void	ft_sorter(char **str)
 {
 	int				p;
@@ -40,8 +37,6 @@ void	ft_sorter(char **str)
 	}
 }
 
-//For the display, what to still work on is equal space display, optimized for the window/tab;
-//On MAC, printing form 'p = 2' prints without any spaces beforehand, check what's stored in the array;
 void	ft_display_content(char **s)
 {
 	int		p;
@@ -55,17 +50,11 @@ void	ft_display_content(char **s)
 		{
 			ft_putstr(s[p]);
 			ft_putchar('\n');
-			//ft_putnbr(ft_strcmp(s[p - 1], s[p]));
-			//ft_putchar(' ');
-			//ft_putchar(' ');
-			//ft_putchar(' ');
 			p++;
 		}
 	}
 }
 
-//Chop this code up to smaller blocks. DO NOT FORGET THE 5x25 rule;
-//Now you can work on printing out the various flags for the ls, the basic 'ls' works just fine on the MAC;
 int		main(int argc, char **argv)
 {
 	struct dirent	*pDirent;
@@ -73,6 +62,7 @@ int		main(int argc, char **argv)
 	char			**st;
 	int				p;
 	int				count;
+	int				k;
 
 	if (argc < 2)
 		return (0);
@@ -86,22 +76,26 @@ int		main(int argc, char **argv)
 	if (!(st = (char**)malloc(sizeof(char*) * count)))
 		return (0);
 	ft_bzero(st, count);
-	p = 0;
+	/*p = 0;
 	while (p < count)
 	{
 		if (!(st[p] = ft_memalloc(30)))
 			return (0);
 		p++;
-	}
+	}*/
 	p = 0;
 	if ((pDir = opendir(argv[1])) == NULL)
 		return (0);
 	while ((pDirent = readdir(pDir)) != NULL)
 	{
+		k = ft_strlen(pDirent->d_name);
+		if (!(st[p] = ft_memalloc(k + 1)))
+			return (0);
 		ft_strcpy(st[p], pDirent->d_name);
+		st[p][k + 1] = '\0';
 		p++;
 	}
-	st[p][0] = '\0';
+	//st[p][0] = '\0';
 	ft_sorter(st);
 	ft_display_content(st);
 	ft_putchar('\n');
