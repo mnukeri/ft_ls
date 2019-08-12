@@ -46,7 +46,7 @@ void	ft_display_content(char **s)
 {
 	int		p;
 
-	p = 2;
+	p = 0;
 	while (s[p])
 	{
 		if (s[p][0] == '.')
@@ -54,11 +54,11 @@ void	ft_display_content(char **s)
 		else
 		{
 			ft_putstr(s[p]);
-			ft_putchar(' ');
-			ft_putnbr(ft_strcmp(s[p - 1], s[p]));
-			ft_putchar(' ');
-			ft_putchar(' ');
-			ft_putchar(' ');
+			ft_putchar('\n');
+			//ft_putnbr(ft_strcmp(s[p - 1], s[p]));
+			//ft_putchar(' ');
+			//ft_putchar(' ');
+			//ft_putchar(' ');
 			p++;
 		}
 	}
@@ -72,35 +72,30 @@ int		main(int argc, char **argv)
 	DIR				*pDir;
 	char			**st;
 	int				p;
+	int				count;
 
 	if (argc < 2)
-	{
-		printf("Usage: a.out <dirname>\n");
-		return (1);
-	}
-	pDir = opendir(argv[1]);
-	if (pDir == NULL)
-	{
-		printf("cannot open directory [%s]\n", argv[1]);
-		return (1);
-	}
-	if (!(st = (char**)malloc(sizeof(char*) * (15))))
-	{
-		printf("Couldn't set first memory bank.");
 		return (0);
-	}
-	ft_bzero(st, 15);
+	if ((pDir = opendir(argv[1])) == NULL)
+		return (0);
 	p = 0;
-	while (p < 15)
+	while ((pDirent = readdir(pDir)) != NULL)
+		p++;
+	closedir(pDir);
+	count = p + 1;
+	if (!(st = (char**)malloc(sizeof(char*) * count)))
+		return (0);
+	ft_bzero(st, count);
+	p = 0;
+	while (p < count)
 	{
-		if (!(st[p] = ft_memalloc(20)))
-		{
-			printf("Couldn't expand memory block p: %d\n", p);
+		if (!(st[p] = ft_memalloc(30)))
 			return (0);
-		}
 		p++;
 	}
 	p = 0;
+	if ((pDir = opendir(argv[1])) == NULL)
+		return (0);
 	while ((pDirent = readdir(pDir)) != NULL)
 	{
 		ft_strcpy(st[p], pDirent->d_name);
