@@ -28,7 +28,7 @@ void	ft_sorter(char **str)
 	while (str[p])
 	{
 		k = ft_strcmp(str[p - 1], str[p]);
-		if (k > 0)
+		if (k == 1)
 		{
 			ft_array_swapper(str[p - 1], str[p]);
 			p = 0;
@@ -75,27 +75,21 @@ int		main(int argc, char **argv)
 	count = p + 1;
 	if (!(st = (char**)malloc(sizeof(char*) * count)))
 		return (0);
-	ft_bzero(st, count);
-	/*p = 0;
-	while (p < count)
-	{
-		if (!(st[p] = ft_memalloc(30)))
-			return (0);
-		p++;
-	}*/
+	ft_memset(st, 0, count);
 	p = 0;
 	if ((pDir = opendir(argv[1])) == NULL)
 		return (0);
 	while ((pDirent = readdir(pDir)) != NULL)
 	{
 		k = ft_strlen(pDirent->d_name);
-		if (!(st[p] = ft_memalloc(k + 1)))
+		k += 1;
+		if (!(st[p] = (char*)malloc(sizeof(char) * k)))
 			return (0);
+		//ft_bzero(st[p], k);
+		ft_memset(st[p], 0, k);
 		ft_strcpy(st[p], pDirent->d_name);
-		st[p][k + 1] = '\0';
 		p++;
 	}
-	//st[p][0] = '\0';
 	ft_sorter(st);
 	ft_display_content(st);
 	ft_putchar('\n');
