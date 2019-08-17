@@ -4,16 +4,35 @@
 #include <stdlib.h>
 #include <sys/types.h>
 
-void	ft_array_swapper(char *st1, char *st2)
+void	ft_array_swap(char *s1, char *s2)
 {
-	char *temp;
+	char	*temp;
+	int		p;
 
-	if (st1 == NULL || st2 == NULL)
+	if (s1 == NULL || s2 == NULL)
 		return ;
-	temp = ft_memalloc(20);
-	ft_strcpy(temp, st1);
-	ft_strcpy(st1, st2);
-	ft_strcpy(st2, temp);
+	temp = ft_memalloc(150);
+	p = 0;
+	while (s1[p])
+	{
+		temp[p] = s1[p];
+		p++;
+	}
+	temp[p] = '\0';
+	p = 0;
+	while (s2[p])
+	{
+		s1[p] = s2[p];
+		p++;
+	}
+	s1[p] = '\0';
+	p = 0;
+	while (temp[p])
+	{
+		s2[p] = temp[p];
+		p++;
+	}
+	s2[p] = '\0';
 	free(temp);
 }
 
@@ -30,7 +49,7 @@ void	ft_sorter(char **str)
 		k = ft_strcmp(str[p - 1], str[p]);
 		if (k == 1)
 		{
-			ft_array_swapper(str[p - 1], str[p]);
+			ft_char_swap(str[p - 1], str[p]);
 			p = 0;
 		}
 		p++;
@@ -44,14 +63,14 @@ void	ft_display_content(char **s)
 	p = 0;
 	while (s[p])
 	{
-		if (s[p][0] == '.')
+		/*if (s[p][0] == '.')
 			p++;
 		else
-		{
-			ft_putstr(s[p]);
-			ft_putchar('\n');
-			p++;
-		}
+		{*/
+		ft_putstr(s[p]);
+		ft_putchar('\n');
+		p++;
+		//}
 	}
 }
 
@@ -85,15 +104,13 @@ int		main(int argc, char **argv)
 		k += 1;
 		if (!(st[p] = (char*)malloc(sizeof(char) * k)))
 			return (0);
-		//ft_bzero(st[p], k);
 		ft_memset(st[p], 0, k);
 		ft_strcpy(st[p], pDirent->d_name);
 		p++;
 	}
+	closedir(pDir);
 	ft_sorter(st);
 	ft_display_content(st);
-	ft_putchar('\n');
 	free(st);
-	closedir(pDir);
 	return (0);
 }
