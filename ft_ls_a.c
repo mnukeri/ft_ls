@@ -23,20 +23,35 @@ int			ft_sorter(char **s)
 {
 	int		p;
 	int		k;
+	int		steps;
 
 	if (s == NULL)
 		return (0);
 	p = 1;
+	steps = 0;
 	while (s[p])
 	{
 		k = ft_strcmp(s[p - 1], s[p]);
+		/*ft_putstr("s1: ");
+		ft_putstr(s[p - 1]);
+		ft_putstr(" || s2: ");
+		ft_putendl(s[p]);*/
+		//if (s[p - 1][0] == '\0')
+		//	k = 1;
 		if (k == 1)
 		{
+			ft_putstr("SWITCH UP!");
+			ft_putchar('\n');
 			if (ft_array_swap(s[p - 1], s[p]) != 1)
 				return (0);
 			p = 0;
 		}
 		p++;
+		steps++;
+		//ft_putnbr(steps);
+		//ft_putchar(' ');
+		//ft_putnbr(p);
+		//ft_putchar('\n');
 	}
 	return (1);
 }
@@ -80,7 +95,7 @@ int			main(int argc, char **argv)
 		p++;
 	closedir(pDir);
 	count = p + 1;
-	if (!(st = ft_memalloc_2d(count)))
+	if (!(st = (char**)ft_memalloc_2d(count)))
 		return (0);
 	ft_bzero(st, count);
 	p = 0;
@@ -95,9 +110,9 @@ int			main(int argc, char **argv)
 		ft_strcpy(st[p], pDirent->d_name);
 		p++;
 	}
-	if (ft_content_display(st) != 1)
-		return (0);
 	if (ft_sorter(st) != 1)
+		return (0);
+	if (ft_content_display(st) != 1)
 		return (0);
 	free(st);
 	closedir(pDir);
