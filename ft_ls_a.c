@@ -60,40 +60,63 @@ static int	ft_content_display(char **s)
 	return (1);
 }
 
-int			main(int argc, char **argv)
+static int	ft_dir_count(char **dir)
+{
+	struct dirent	*pDirent;
+	DIR				*pDir;
+	int				k;
+
+	if ((pDir = opendir(*dir)) == NULL)
+		return (0);
+	k = 0;
+	while ((pDirent = readdir(pDir)) != NULL)
+		k += ft_strlen(pDirent->d_name) + 1;
+	closedir(pDir);
+	return (k);
+}
+
+static char		**ft_dir_copy(char **dir, int k)
 {
 	struct dirent	*pDirent;
 	DIR				*pDir;
 	char			*st;
 	char			**s;
-	int				p;
-	int				count;
-	int				k;
 
-	if (argc < 2)
-		return (0);
-	if ((pDir = opendir(argv[1])) == NULL)
-		return (0);
-	p = 0;
-	k = 0;
-	while ((pDirent = readdir(pDir)) != NULL)
-	{
-		k += ft_strlen(pDirent->d_name) + 1;
-		p++;
-	}
-	closedir(pDir);
-	count = p + 1;
 	if (!(st = ft_memalloc(k)))
 		return (0);
 	ft_bzero(st, k);
-	if ((pDir = opendir(argv[1])) == NULL)
+	if ((pDir = opendir(*dir)) == NULL)
 		return (0);
 	while ((pDirent = readdir(pDir)) != NULL)
 	{
 		ft_strcat(st, pDirent->d_name);
 		ft_strcat(st, " ");
 	}
-	s = ft_strsplit(st, ' ');
+	if (!(s = ft_strsplit(st, ' ')))
+	{
+		ft_putendl("could not string split");
+		return (0);
+	}
+	return (s);
+}
+
+int			main(int argc, char **argv)
+{
+	char			**s;
+	int				k;
+
+	if (argc < 2)
+		return (0);
+	if ((k = ft_dir_count(&argv[1])) < 0)
+	{
+		ft_putendl("Could not count elements in directory");
+		return (0);
+	}
+	if (!(s = ft_dir_copy(&argv[1], k)))
+	{
+		ft_putendl("Could not copy elements into array");
+		return (0);
+	}
 	if (ft_sorter(s) != 1)
 	{
 		ft_putendl("Could not sort");
@@ -104,7 +127,6 @@ int			main(int argc, char **argv)
 		ft_putendl("could not display after sorting");
 		return (0);
 	}
-	free(st);
-	closedir(pDir);
+	free(s);
 	return (0);
 }
