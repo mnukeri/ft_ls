@@ -6,7 +6,7 @@
 #    By: mnukeri <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/24 16:53:37 by mnukeri           #+#    #+#              #
-#    Updated: 2019/08/24 17:21:02 by mnukeri          ###   ########.fr        #
+#    Updated: 2019/08/24 17:27:55 by mnukeri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ ${NAME}:
 	@${ARC} ${NAME} ${OBJ}
 	@echo "Indexing library.."
 	@ranlib ${NAME}
-	@echo "Compiling executable.."
-	@${CC} ${FLAG} ls_main.c libft/libft.a ft_ls.a 
+	@echo "Compiling executable 'ft_ls'.."
+	@${CC} ${FLAG} ls_main.c libft/libft.a ft_ls.a -o ft_ls
 
 all: ${NAME}
 

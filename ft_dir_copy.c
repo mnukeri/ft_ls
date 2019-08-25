@@ -6,7 +6,7 @@
 /*   By: mnukeri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/24 16:18:32 by mnukeri           #+#    #+#             */
-/*   Updated: 2019/08/24 16:23:19 by mnukeri          ###   ########.fr       */
+/*   Updated: 2019/08/24 17:09:01 by mnukeri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char		**ft_dir_copy(char **dir, int k)
 		return (0);
 	while ((pDirent = readdir(pDir)) != NULL)
 	{
-		ft_strcat(st, pDiren->d_name);
+		ft_strcat(st, pDirent->d_name);
 		ft_strcat(st, " ");
 	}
 	if (!(s = ft_strsplit(st, ' ')))

@@ -6,7 +6,7 @@
 /*   By: mnukeri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/24 16:33:37 by mnukeri           #+#    #+#             */
-/*   Updated: 2019/08/24 16:35:55 by mnukeri          ###   ########.fr       */
+/*   Updated: 2019/08/24 17:08:07 by mnukeri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			ft_array_swap(char *s1, char *s2)
 	if (!(temp = ft_strnew(ft_strlen(s1))))
 		return (0);
 	ft_strcpy(temp, s1);
-	ft_strspy(s1, s2);
+	ft_strcpy(s1, s2);
 	ft_strcpy(s2, temp);
 	free(temp);
 	return (1);

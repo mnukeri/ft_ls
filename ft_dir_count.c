@@ -6,7 +6,7 @@
 /*   By: mnukeri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/24 16:23:42 by mnukeri           #+#    #+#             */
-/*   Updated: 2019/08/24 16:28:00 by mnukeri          ###   ########.fr       */
+/*   Updated: 2019/08/24 17:08:40 by mnukeri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			ft_dir_count(char **dir)
 	if ((pDir = opendir(*dir)) == NULL)
 		return (0);
 	k = 0;
-	while ((pDiren = readdir(pDir)) != NULL)
+	while ((pDirent = readdir(pDir)) != NULL)
 		k += ft_strlen(pDirent->d_name) + 1;
 	closedir(pDir);
 	return (k);
