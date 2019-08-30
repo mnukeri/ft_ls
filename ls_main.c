@@ -6,7 +6,7 @@
 /*   By: mnukeri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/24 16:37:38 by mnukeri           #+#    #+#             */
-/*   Updated: 2019/08/24 17:33:56 by mnukeri          ###   ########.fr       */
+/*   Updated: 2019/08/30 15:32:12 by mnukeri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,22 @@
 
 int		main(int argc, char **argv)
 {
-	char		**s;
-	int			k;
+	char	*path;
 
-	if (argc < 2)
-		return (0);
-	if ((k = ft_dir_count(&argv[1])) < 0)
+	if (argc < 1)
 	{
-		ft_putendl("Could not count elements in directory;");
+		ft_putendl("PLease gooi in a proper path");
 		return (0);
 	}
-	if (!(s = ft_dir_copy(&argv[1], k)))
+	if(argc == 1)
 	{
-		ft_putendl("Could not copy elements into array;");
+		path = ".";
+		ls_process(&path);
 		return (0);
 	}
-	if (ft_sorter(s) != 1)
+	if (ls_process(&argv[1]) != 1)
 	{
-		ft_putendl("Could not sort;");
+		ft_putendl("Could not finish the LS main, mayn;");
 		return (0);
 	}
-	if (ft_content_display(s) != 1)
-	{
-		ft_putendl("Could not display content after sorting");
-		return (0);
-	}
-	free(s);
-	return (0);
 }
