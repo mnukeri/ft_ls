@@ -6,25 +6,25 @@
 /*   By: mnukeri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:25:34 by mnukeri           #+#    #+#             */
-/*   Updated: 2019/08/30 15:34:11 by mnukeri          ###   ########.fr       */
+/*   Updated: 2019/09/01 18:08:38 by mnukeri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		ls_process(char **dir)
+int		ls_process(char **dir, int k)
 {
 	char	**s;
-	int		k;
+	int		dir_count;
 
 	if (dir == NULL)
 		return (0);
-	if ((k = ft_dir_count(dir)) < 0)
+	if ((dir_count = ft_dir_count(dir)) < 0)
 	{
 		ft_putendl("Could not count elements in directory, harde ntwana;");
 		return (0);
 	}
-	if (!(s = ft_dir_copy(dir, k)))
+	if (!(s = ft_dir_copy(dir, dir_count)))
 	{
 		ft_putendl("Could not copy elements into array, harde ntwana;");
 		return (0);
@@ -34,7 +34,7 @@ int		ls_process(char **dir)
 		ft_putendl("Could not sort array of directory elements, harde ntwana;");
 		return (0);
 	}
-	if (ft_content_display(s) != 1)
+	if (ft_content_display(s, k) != 1)
 	{
 		ft_putendl("Could not display elements after sorting, harde ntwana;");
 	}
