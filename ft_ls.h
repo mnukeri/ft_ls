@@ -6,7 +6,7 @@
 /*   By: mnukeri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/24 16:12:42 by mnukeri           #+#    #+#             */
-/*   Updated: 2019/09/01 18:08:35 by mnukeri          ###   ########.fr       */
+/*   Updated: 2019/09/09 18:57:03 by mnukeri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int		ft_content_display(char **s, int k);
 int		ft_dir_count(char **dir);
 char	**ft_dir_copy(char **dir, int k);
 int		ls_process(char **dir, int k);
-char	**input_holder(char **input);
+int		flag_checker(char *input);
 
 #endif

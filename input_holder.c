@@ -6,7 +6,7 @@
 /*   By: mnukeri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 17:52:54 by mnukeri           #+#    #+#             */
-/*   Updated: 2019/09/01 18:08:27 by mnukeri          ###   ########.fr       */
+/*   Updated: 2019/09/09 16:20:16 by mnukeri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	**input_holder(char **input)
 	if (input == NULL)
 		return (NULL);
 	p = 0;
+	k = 0;
 	while (input[p])
 		k += ft_strlen(input[p++]);
 	if (!(s = ft_memalloc(k + 1)))

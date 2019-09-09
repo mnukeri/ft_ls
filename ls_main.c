@@ -6,7 +6,7 @@
 /*   By: mnukeri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/24 16:37:38 by mnukeri           #+#    #+#             */
-/*   Updated: 2019/09/01 18:08:31 by mnukeri          ###   ########.fr       */
+/*   Updated: 2019/09/09 18:57:27 by mnukeri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,37 @@ int		main(int argc, char **argv)
 	int		p;
 
 	if (argc < 1)
-	{
-		ft_putendl("PLease gooi in a proper path");
 		return (0);
-	}
-	k = flag_checker(argv);
-	path = path_checker(argv);
-	if(argc == 1)
+	k = 0;
+	if (argc == 1)
 	{
 		path1 = ".";
 		ls_process(&path1, k);
 		return (0);
 	}
-	p = 0;
-	while (path[p])
+	if (argc == 2)
 	{
-		if (ls_process(&path[p], k) != 1)
+		if (argv[1][0] == "-")
+		{
+			k = flag_checker(argv[1]);
+			path1 = ".";
+		}
+		if (argv[1][0] != "-")
+			path1 = argv[1];
+		if (ls_process(&path1, k) != 1)
+		{
+			ft_putendl("Could not work with a single input, harde ntwana;");
+			return (0);
+		}
+	}
+	if (argv[2][0] != '-')
+	{
+		path = &argv[2];
+		if (ls_process(path, k) != 1)
 		{
 			ft_putendl("Could not finish the LS process, harde ntwana;");
 			return (0);
 		}
-		p++;
 	}
-	free(path);
 	return (0);
 }
