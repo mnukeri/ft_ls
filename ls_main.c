@@ -6,7 +6,7 @@
 /*   By: mnukeri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/24 16:37:38 by mnukeri           #+#    #+#             */
-/*   Updated: 2019/09/09 18:57:27 by mnukeri          ###   ########.fr       */
+/*   Updated: 2019/09/10 17:11:49 by mnukeri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		main(int argc, char **argv)
 	char	**path;
 	char	*path1;
 	int		k;
-	int		p;
 
 	if (argc < 1)
 		return (0);
@@ -30,12 +29,12 @@ int		main(int argc, char **argv)
 	}
 	if (argc == 2)
 	{
-		if (argv[1][0] == "-")
+		if (argv[1][0] == '-')
 		{
 			k = flag_checker(argv[1]);
 			path1 = ".";
 		}
-		if (argv[1][0] != "-")
+		if (argv[1][0] != '-')
 			path1 = argv[1];
 		if (ls_process(&path1, k) != 1)
 		{
@@ -43,7 +42,7 @@ int		main(int argc, char **argv)
 			return (0);
 		}
 	}
-	if (argv[2][0] != '-')
+	if (argc > 1 && argv[2][0] != '-')
 	{
 		path = &argv[2];
 		if (ls_process(path, k) != 1)

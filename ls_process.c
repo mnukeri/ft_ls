@@ -6,7 +6,7 @@
 /*   By: mnukeri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 16:25:34 by mnukeri           #+#    #+#             */
-/*   Updated: 2019/09/01 18:08:38 by mnukeri          ###   ########.fr       */
+/*   Updated: 2019/09/10 17:11:46 by mnukeri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int		ls_process(char **dir, int k)
 		ft_putendl("Could not count elements in directory, harde ntwana;");
 		return (0);
 	}
+	ft_putnbr(dir_count);
+	ft_putchar('\n');
 	if (!(s = ft_dir_copy(dir, dir_count)))
 	{
 		ft_putendl("Could not copy elements into array, harde ntwana;");
