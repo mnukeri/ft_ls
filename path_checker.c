@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_main.c                                          :+:      :+:    :+:   */
+/*   path_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnukeri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/24 16:37:38 by mnukeri           #+#    #+#             */
-/*   Updated: 2019/09/12 16:15:34 by mnukeri          ###   ########.fr       */
+/*   Created: 2019/09/12 15:06:02 by mnukeri           #+#    #+#             */
+/*   Updated: 2019/09/12 15:26:13 by mnukeri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		main(int argc, char **argv)
+char	*path_checker(char **input)
 {
-	char	*path1;
-	int		k;
+	int		p;
 
-	if (argc < 1)
-		return (0);
-	k = 0;
-	if (argc == 1)
+	if (!(input))
 	{
-		path1 = ".";
-		ls_process(&path1, k);
+		ft_putendl("Could not read from the input into 'path_checker' func, harde ntwana;");
 		return (0);
 	}
-	if (argc > 1)
+	p = 1;
+	while (input[p])
 	{
-		path1 = path_checker(argv);
-		k = flag_checker(argv);
-		if (ls_process(&path1, k) != 1)
-		{
-			ft_putendl("Could not finish the LS process, harde ntwana;");
-			return (0);
-		}
+		if (input[p][0] == '-')
+			p++;
+		else
+			return ((char *)input[p]);
 	}
+	ft_putendl("Could not find a 'path' after reading the input into 'path_checker' func, harde ntwana;");
 	return (0);
 }
