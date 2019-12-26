@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-int		ls_process(char **dir, int k)
+int		ls_process_R(char **dir, int k)
 {
 	char	**s;
 	int		dir_count;
@@ -39,6 +39,6 @@ int		ls_process(char **dir, int k)
 		ft_putendl("Could not display elements after sorting, harde ntwana;");
 		return (0);
 	}
-	ft_strdel(s);
+	free(s);
 	return (1);
 }

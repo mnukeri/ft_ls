@@ -12,37 +12,91 @@
 
 #include "ft_ls.h"
 
-static int	ft_k_0(char **str)
+static void	ft_k_4(char **str)
+{
+	int		p;
+
+	if (!str)
+		return ;
+	p = 0;
+	while (str[p])
+		p++;
+	p--;
+	while (p >= 0)
+	{
+		if (str[p][0] != '.')
+			ft_putendl(str[p]);
+		p--;
+	}
+}
+
+static void	ft_k_1(char **str)
+{
+	int		p;
+
+	if (!str)
+		return ;
+	p = 0;
+	while (str[p])
+	{
+		ft_putendl(str[p]);
+		p++;
+	}
+}
+
+static void	ft_k_0(char **str)
 {
 	int		p;
 
 	if (str == NULL)
-		return (0);
+		return ;
 	p = 0;
 	while (str[p])
 	{
-		if (s[p][0] != '.')
+		if (str[p][0] != '.')
 			ft_putendl(str[p]);
 		p++;
 	}
-	return (1);
+}
+
+static void	ft_k_5(char **str)
+{
+	int		p;
+
+	if (!str)
+		return ;
+	p = 0;
+	while (str[p])
+	{
+		/*if (str[p][1] == '.')
+			p++;
+		if (ft_strlen(str[p]) > 1 && str[p][0] == '.')
+			p++;*/
+		if (ft_dir_check(str[p]) == 1)
+		{
+			ft_putchar('/');
+			ft_putendl(str[p]);
+			ft_putendl("***   ***   ***");
+			ls_process_R(&str[p], 0);
+			ft_putendl("***   ***   ***");
+			ft_putchar('\n');
+			ft_putchar('\n');
+		}
+		p++;
+	}
 }
 
 int			ft_content_display(char **s, int k)
 {
-	int		p;
-
 	if (s == NULL)
 		return (0);
-	p = 0;
 	if (k == 0)
-	{
-		if (ft_
-	}
+		ft_k_0(s);
 	if (k == 1)
-	{
-		while (s[p])
-			ft_putendl(s[p++]);
-	}
+		ft_k_1(s);
+	if (k == 4)
+		ft_k_4(s);
+	if (k == 5)
+		ft_k_5(s);
 	return (1);
 }

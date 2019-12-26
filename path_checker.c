@@ -26,8 +26,13 @@ char	*path_checker(char **input)
 	{
 		if (input[p][0] == '-')
 			p++;
+		if (ft_dir_check(input[p]) == 0)
+		{
+			ft_putendl("This does not look like a valid directory path, harde ekse");
+			return (0);
+		}
 		else
-			return ((char *)input[p]);
+			return ((char*)input[p]);
 	}
 	ft_putendl("Could not find a 'path' after reading the input into 'path_checker' func, harde ntwana;");
 	return (0);

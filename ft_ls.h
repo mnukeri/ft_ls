@@ -28,5 +28,7 @@ char	**ft_dir_copy(char **dir, int k);
 int		ls_process(char **dir, int k);
 int		flag_checker(char **input);
 char	*path_checker(char **input);
+int     ft_dir_check(char *st);
+int     ls_process_R(char **dir, int k);
 
 #endif
