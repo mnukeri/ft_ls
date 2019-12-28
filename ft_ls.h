@@ -14,8 +14,10 @@
 # define FT_LS_H
 
 # include <dirent.h>
+# include <time.h>
 # include "libft/libft.h"
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
@@ -30,5 +32,7 @@ int		flag_checker(char **input);
 char	*path_checker(char **input);
 int     ft_dir_check(char *st);
 int     ls_process_R(char **dir, int k);
+//int     ft_flag_L(char **dir);
+void    ft_pr_perm(unsigned int perms, int direc);
 
 #endif
