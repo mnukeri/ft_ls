@@ -12,14 +12,14 @@
 
 #include "ft_ls.h"
 
-int		ls_process_R(char **dir, int k)
+int		ls_process_R(char **dir)
 {
 	char	**s;
 	int		dir_count;
 
 	if (dir == NULL)
 		return (0);
-	if ((dir_count = ft_dir_count(dir)) < 1)
+	if ((dir_count = ft_dir_count(dir, 5)) < 1)
 	{
 		ft_putendl("Could not count elements in directory, harde ntwana;");
 		return (0);
@@ -34,7 +34,7 @@ int		ls_process_R(char **dir, int k)
 		ft_putendl("Could not sort array of directory elements, harde ntwana;");
 		return (0);
 	}
-	if (ft_content_display(s, k) != 1)
+	if (ft_content_display(s,0) != 1)
 	{
 		ft_putendl("Could not display elements after sorting, harde ntwana;");
 		return (0);

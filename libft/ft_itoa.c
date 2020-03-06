@@ -12,19 +12,6 @@
 
 #include "libft.h"
 
-static int		ft_dig(int d)
-{
-	int		k;
-
-	k = 0;
-	while (d != 0)
-	{
-		d /= 10;
-		k++;
-	}
-	return (k);
-}
-
 char			*ft_itoa(int n)
 {
 	int		p;

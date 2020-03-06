@@ -1,18 +1,23 @@
 #include "ft_ls.h"
 
-void        ft_pr_perm(unsigned int perms, int direc)
+char        *ft_pr_perm(unsigned int perms, int direc)
 {
-    int     p;
-    int     *bin;
-    unsigned int     *bin_arr;
-    int     k;
-    char    *perm_arr;
+    int             p;
+    unsigned int    *bin;
+    unsigned int    *bin_arr;
+    int             k;
+    char            *perm_arr;
+    char            *finperms;
 
-    if (!(bin = (int*)malloc(sizeof(int) * 17)))
-        return ;
-    ft_memset(bin,48,17);
-    if (!(bin_arr = (unsigned int*)malloc(sizeof(unsigned int) * 17)))
-        return ;
+    ft_putstr("perms: ");
+    ft_putnbr(perms);
+    ft_putstr("|");
+    if (!(bin = ft_memalloc_int(17)))
+        return (NULL);
+    ft_memset_int(bin,0,17);
+    if (!(bin_arr = ft_memalloc_int(17)))
+        return (NULL);
+    ft_memset_int(bin_arr,0,17);
     p = 0;
     k = 65536;
     while (p < 17)
@@ -21,28 +26,36 @@ void        ft_pr_perm(unsigned int perms, int direc)
         k /= 2;
         p++;
     }
-    p = 0;
-    if (direc == 1)
-        bin[7] = 1;
-    while (p <= 16)
+    p = 16;
+    while (p >= 0)
     {
-        if (perms > bin_arr[p])
-        {
-            perms -= bin_arr[p];
-            bin[p] = 1;
-        }
-        p++;        
+        bin[p] = (perms % 2) ? 1 : 0;
+        perms /= 2;
+        p--;        
     }
     perm_arr = "drwxrwxrwx";
-    p = 7;
+    if (!(finperms = ft_memalloc(11)))
+        return (NULL);
     k = 0;
-    while (p <= 16)
+    p = 7;
+    bin[p] = (direc == 1) ? 1 : 0;
+    ft_putstr(" bin[7]: ");
+    ft_putnbr(bin[p]);
+    ft_putendl("|");
+    while (p < 17)
     {
         if (bin[p] == 1)
-            ft_putchar((int)perm_arr[k]);
+            finperms[k] = (int)perm_arr[k];
         if (bin[p] == 0)
-            ft_putchar('-');
+            finperms[k] = '-';
         k++;
         p++;
     }
+    /*ft_intclr((int*)bin);
+    ft_intclr((int*)bin_arr);
+    ft_strclr(perm_arr);
+    free(bin);
+    free(bin_arr);
+    free(perm_arr);*/
+    return (finperms);
 }

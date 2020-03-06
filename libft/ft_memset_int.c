@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dir_count.c                                     :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnukeri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/24 16:23:42 by mnukeri           #+#    #+#             */
-/*   Updated: 2019/09/12 15:52:55 by mnukeri          ###   ########.fr       */
+/*   Created: 2019/06/04 14:09:43 by mnukeri           #+#    #+#             */
+/*   Updated: 2019/06/04 16:17:46 by mnukeri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-int			ft_dir_count(char **dir, int k)
+void	*ft_memset_int(void *ints, int c, size_t len)
 {
-	struct dirent	*pDirent;
-	DIR				*pDir;
-	int				l;
+	size_t			p;
+	unsigned int	*st;
 
-	if ((pDir = opendir(*dir)) == NULL)
-		return (0);
-	l = 0;
-	while ((pDirent = readdir(pDir)) != NULL)
+	st = (unsigned int *)ints;
+	p = 0;
+	while (p < len)
 	{
-		if ((k == 4 || k == 2 || k == 0) && pDirent->d_name[0] == '.')
-			continue;
-		else
-			l += 1;
+		st[p] = c;
+		p++;
 	}
-	closedir(pDir);
-	return (l);
+	return (ints);
 }

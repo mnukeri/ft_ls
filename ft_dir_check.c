@@ -3,9 +3,12 @@
 int         ft_dir_check(char *st)
 {
     DIR             *pDir;
+    int             k;
 
     if ((pDir = opendir(st)) == NULL)
-        return (0);
+        k = 0;
+    else
+        k = 1;
     closedir(pDir);
-    return (1);
+    return (k);
 }

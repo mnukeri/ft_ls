@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dir_count.c                                     :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnukeri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/24 16:23:42 by mnukeri           #+#    #+#             */
-/*   Updated: 2019/09/12 15:52:55 by mnukeri          ###   ########.fr       */
+/*   Created: 2019/06/07 17:35:57 by mnukeri           #+#    #+#             */
+/*   Updated: 2019/06/16 14:28:13 by mnukeri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-int			ft_dir_count(char **dir, int k)
+void	*ft_memalloc_int(size_t size)
 {
-	struct dirent	*pDirent;
-	DIR				*pDir;
-	int				l;
+	unsigned int *space;
 
-	if ((pDir = opendir(*dir)) == NULL)
+	space = (unsigned int *)malloc(sizeof(int) * size);
+	if (!(space))
 		return (0);
-	l = 0;
-	while ((pDirent = readdir(pDir)) != NULL)
-	{
-		if ((k == 4 || k == 2 || k == 0) && pDirent->d_name[0] == '.')
-			continue;
-		else
-			l += 1;
-	}
-	closedir(pDir);
-	return (l);
+	ft_memset_int(space, 0, size);
+	return (space);
 }

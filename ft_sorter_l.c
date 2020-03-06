@@ -1,33 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dir_count.c                                     :+:      :+:    :+:   */
+/*   ft_sorter.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnukeri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/24 16:23:42 by mnukeri           #+#    #+#             */
-/*   Updated: 2019/09/12 15:52:55 by mnukeri          ###   ########.fr       */
+/*   Created: 2019/08/24 16:30:16 by mnukeri           #+#    #+#             */
+/*   Updated: 2019/08/30 15:17:15 by mnukeri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int			ft_dir_count(char **dir, int k)
+int			ft_sorter_l(char **s)
 {
-	struct dirent	*pDirent;
-	DIR				*pDir;
-	int				l;
+	int		p;
+	int		n;
+	char	**s1;
+	char	**s2;
+	int		steps;
 
-	if ((pDir = opendir(*dir)) == NULL)
+	if (s == NULL)
 		return (0);
-	l = 0;
-	while ((pDirent = readdir(pDir)) != NULL)
+	p = 1;
+	steps = 0;
+	while (s[p])
 	{
-		if ((k == 4 || k == 2 || k == 0) && pDirent->d_name[0] == '.')
-			continue;
-		else
-			l += 1;
+		s1 = ft_strsplit(s[p - 1],' ');
+		s2 = ft_strsplit(s[p],' ');
+		n = ft_strcmp(s1[8], s2[8]);
+		if (n == 1)
+		{
+			if (ft_array_swap(s[p - 1], s[p]) != 1)
+				return (0);
+			p = 0;
+		}
+		p++;
+		steps++;
 	}
-	closedir(pDir);
-	return (l);
+	return (1);
 }

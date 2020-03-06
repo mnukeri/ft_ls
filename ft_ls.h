@@ -21,18 +21,23 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <pwd.h>
+# include <grp.h>
 
 int		ft_sorter(char **s);
+int     ft_sorter_l(char **s);
+int     ft_sorter_t(char **s);
 int		ft_array_swap(char *s1, char *s2);
+char    **ft_diff_flag(char **s, int k);
 int		ft_content_display(char **s, int k);
-int		ft_dir_count(char **dir);
+int		ft_dir_count(char **dir, int k);
 char	**ft_dir_copy(char **dir, int k);
 int		ls_process(char **dir, int k);
 int		flag_checker(char **input);
 char	*path_checker(char **input);
 int     ft_dir_check(char *st);
-int     ls_process_R(char **dir, int k);
+int     ls_process_R(char **dir);
 //int     ft_flag_L(char **dir);
-void    ft_pr_perm(unsigned int perms, int direc);
+char    *ft_pr_perm(unsigned int perms, int direc);
 
 #endif

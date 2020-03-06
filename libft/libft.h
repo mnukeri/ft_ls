@@ -37,6 +37,7 @@ int		ft_isprint(int c);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 void	*ft_memset(void *str, int c, size_t len);
+void    *ft_memset_int(void *ints, int c, size_t len);
 void	ft_bzero(void *str, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memccpy(void *dest, const void *src, int c, size_t n);
@@ -75,5 +76,8 @@ void	ft_int_swap(int *a, int *b);
 int		ft_iscaps(int c);
 void	**ft_memalloc_2d(size_t size);
 int		ft_wc(const char *str, char c);
+void    *ft_memalloc_int(size_t size);
+void    ft_intclr(int *inte);
+int     ft_dig(int dig);
 
 #endif

@@ -15,7 +15,7 @@
 int			ft_sorter(char **s)
 {
 	int		p;
-	int		k;
+	int		n;
 	int		steps;
 
 	if (s == NULL)
@@ -24,8 +24,8 @@ int			ft_sorter(char **s)
 	steps = 0;
 	while (s[p])
 	{
-		k = ft_strcmp(s[p - 1], s[p]);
-		if (k == 1)
+		n = ft_strcmp(s[p - 1], s[p]);
+		if (n == 1)
 		{
 			if (ft_array_swap(s[p - 1], s[p]) != 1)
 				return (0);
