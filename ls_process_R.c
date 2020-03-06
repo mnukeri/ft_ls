@@ -29,11 +29,11 @@ int		ls_process_R(char **dir)
 		ft_putendl("Could not copy elements into array, harde ntwana;");
 		return (0);
 	}
-	if (ft_sorter(s) != 1)
+	/*if (ft_sorter(s) != 1)
 	{
 		ft_putendl("Could not sort array of directory elements, harde ntwana;");
 		return (0);
-	}
+	}*/
 	if (ft_content_display(s,0) != 1)
 	{
 		ft_putendl("Could not display elements after sorting, harde ntwana;");

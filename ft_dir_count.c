@@ -21,6 +21,7 @@ int			ft_dir_count(char **dir, int k)
 	if ((pDir = opendir(*dir)) == NULL)
 		return (0);
 	l = 0;
+	k = l;
 	while ((pDirent = readdir(pDir)) != NULL)
 	{
 		if ((k == 4 || k == 2 || k == 0) && pDirent->d_name[0] == '.')

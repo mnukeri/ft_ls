@@ -17,9 +17,16 @@ int			ft_sorter(char **s)
 	int		p;
 	int		n;
 	int		steps;
+	int		dc;
 
 	if (s == NULL)
 		return (0);
+	dc = 0;
+	while (s[dc])
+		dc++;
+	ft_putstr("man_dc: ");
+	ft_putnbr(dc);
+	ft_putendl("|");
 	p = 1;
 	steps = 0;
 	while (s[p])

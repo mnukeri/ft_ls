@@ -15,6 +15,7 @@
 int		ls_process(char **dir, int k)
 {
 	char	**s;
+	int		p;
 
 	if (dir == NULL)
 		return (0);
@@ -24,6 +25,13 @@ int		ls_process(char **dir, int k)
 		return (0);
 	}
 
+	p = 0;
+	while (s[p])
+		ft_putendl(s[p++]);
+	ft_putstr("Total: ");
+	ft_putnbr(p);
+	ft_putendl("|");
+	//code is seg'ing from here on MAC;
 	if (k == 3)
 	{
 		if (ft_sorter_t(s) != 1)
@@ -47,6 +55,7 @@ int		ls_process(char **dir, int k)
 			ft_putendl("Could not sort array of directory elements, harde ntwana;");
 			return (0);
 		}
+		ft_putendl("we are here.. ");
 	}
 
 	if (ft_content_display(s, k) != 1)

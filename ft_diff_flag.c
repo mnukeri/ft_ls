@@ -69,7 +69,7 @@ char		**ft_k_3(char **str, int dc) //-t
 		}
 	}
 	closedir(pDir);
-	s[m] = '\0';
+	s[m] = "\0";
 	return (s);
 }
 
@@ -165,7 +165,7 @@ char		**ft_k_2(char **str, int dc) //-l
         }
     }
 	closedir(pDir);
-	s[m] = '\0';
+	s[m] = "\0";
 	return (s); 
 }
 
@@ -191,7 +191,7 @@ char    **ft_k_1(char **str, int dc) //-a
         m++;
     }
 	closedir(pDir);
-	s[m] = '\0';
+	s[m] = "\0";
 	return (s);
 }
 
@@ -220,7 +220,7 @@ char    **ft_k_0(char **str, int dc) //default
         }
 	}
 	closedir(pDir);
-	s[m] = '\0';
+	s[m] = "\0";
     return (s);
 }
 
