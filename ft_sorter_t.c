@@ -1,9 +1,9 @@
 #include "ft_ls.h"
 
-int			ft_sorter_t(char **s)
+int			ft_sorter_t(char **s, char **dir)
 {
 	int		p;
-	//int		k;
+	int		dc;
 	char	**s1;
 	char	**s2;
 	int		st1;
@@ -12,6 +12,7 @@ int			ft_sorter_t(char **s)
 
 	if (s == NULL)
 		return (0);
+	dc = ft_dir_count(dir, 3);
 	p = 1;
 	steps = 0;
 	while (s[p])

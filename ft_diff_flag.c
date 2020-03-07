@@ -58,9 +58,9 @@ char		**ft_k_3(char **str, int dc) //-t
 			st = ft_strjoin(st, ft_itoa(filestat.st_mtime));
 			st = ft_strjoin(st, "`");
 			st = ft_strjoin(st, ctime(&filestat.st_mtime));
-			/*ft_putstr("st: ");
+			ft_putstr("st: ");
 			ft_putstr(st);
-			ft_putendl("|");*/
+			ft_putendl("|");
 			if (!(s[m] = ft_memalloc(ft_strlen(st) + 1)))
 				return (0);
 			ft_strcpy(s[m], st);
@@ -69,7 +69,6 @@ char		**ft_k_3(char **str, int dc) //-t
 		}
 	}
 	closedir(pDir);
-	s[m] = "\0";
 	return (s);
 }
 
@@ -165,7 +164,6 @@ char		**ft_k_2(char **str, int dc) //-l
         }
     }
 	closedir(pDir);
-	s[m] = "\0";
 	return (s); 
 }
 
@@ -188,10 +186,10 @@ char    **ft_k_1(char **str, int dc) //-a
         if (!(s[m] = ft_memalloc(ft_strlen(pDirent->d_name) + 1)))
             return (0);
         ft_strcpy(s[m], (char*)pDirent->d_name);
+		ft_putendl(s[m]);
         m++;
     }
 	closedir(pDir);
-	s[m] = "\0";
 	return (s);
 }
 
@@ -213,36 +211,41 @@ char    **ft_k_0(char **str, int dc) //default
 	{
 		if (pDirent->d_name[0] != '.')
         {
-            if (!(s[m] = ft_memalloc(ft_strlen(pDirent->d_name) + 1)))
+            if (!(s[m] = ft_memalloc(ft_strlen(pDirent->d_name))))
                 return (0);
-            ft_strcpy(s[m], (char*)pDirent->d_name);
+            s[m] = ft_strdup((char*)pDirent->d_name);
+			ft_putstr("s[");
+			ft_putnbr(m);
+			ft_putstr("]: ");
+			ft_putstr(s[m]);
+			ft_putstr("| len: ");
+			ft_putendl(ft_itoa(ft_strlen(pDirent->d_name)));
         	m++;
         }
 	}
 	closedir(pDir);
-	s[m] = "\0";
     return (s);
 }
 
 
 
-char		**ft_diff_flag(char **s, int k)
+char		**ft_diff_flag(char **dir, int k)
 {
     int     dir_count;
     char    **finstr;
 
-	if (s == NULL || k < 0 || k > 5)
+	if (dir == NULL || k < 0 || k > 5)
 		return (0);
-	dir_count = ft_dir_count(s, k);
-	if (k == 0)//default
-		finstr = ft_k_0(s, dir_count);
+	dir_count = ft_dir_count(dir, k);
+	if (k == 0 || k == 4)//default
+		finstr = ft_k_0(dir, dir_count);
 	if (k == 1)//-a
-		finstr = ft_k_1(s, dir_count);
+		finstr = ft_k_1(dir, dir_count);
 	if (k == 2)//-l
-		finstr = ft_k_2(s, dir_count);
+		finstr = ft_k_2(dir, dir_count);
 	if (k == 3)//-t
-		finstr = ft_k_3(s, dir_count);
+		finstr = ft_k_3(dir, dir_count);
 	if (k == 5)//-R
-		finstr = ft_k_5(s);
+		finstr = ft_k_5(dir);
 	return (finstr);
 }

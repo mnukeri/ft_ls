@@ -18,11 +18,17 @@ int			ft_array_swap(char *s1, char *s2)
 
 	if (s1 == NULL || s2 == NULL)
 		return (0);
-	if (!(temp = ft_strnew(ft_strlen(s1))))
+	if (!(temp = ft_strnew(ft_strlen(s1) + 1)))
 		return (0);
 	ft_strcpy(temp, s1);
+	ft_putstr("temp: ");
+	ft_putstr(temp);
 	ft_strcpy(s1, s2);
+	ft_putstr("\t| s1: ");
+	ft_putstr(s1);
 	ft_strcpy(s2, temp);
+	ft_putstr("\t| s2: ");
+	ft_putendl(s2);
 	free(temp);
 	return (1);
 }

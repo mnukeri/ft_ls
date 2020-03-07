@@ -12,34 +12,44 @@
 
 #include "ft_ls.h"
 
-int			ft_sorter(char **s)
+int			ft_sorter(char **s, char **dir, int k)
 {
 	int		p;
 	int		n;
-	int		steps;
 	int		dc;
+	int		steps;
 
 	if (s == NULL)
 		return (0);
-	dc = 0;
-	while (s[dc])
-		dc++;
-	ft_putstr("man_dc: ");
+	dc = ft_dir_count(dir, k);
+	ft_putstr("dc_a: ");
 	ft_putnbr(dc);
-	ft_putendl("|");
+	ft_putchar('\n');
 	p = 1;
 	steps = 0;
-	while (s[p])
+	while (s[p]) //keeps seg'ing when reaches fcd.o
 	{
 		n = ft_strcmp(s[p - 1], s[p]);
+		ft_putstr("n: ");
+		ft_putnbr(n);
+		ft_putstr("| p: ");
+		ft_putnbr(p - 1);
+		ft_putchar(' ');
+		ft_putstr(ft_itoa(p));
+		ft_putstr("\t| s[p-1]: ");
+		ft_putstr(s[p - 1]);
+		ft_putstr("\t| s[p]: ");
+		ft_putendl(s[p]);
 		if (n == 1)
 		{
 			if (ft_array_swap(s[p - 1], s[p]) != 1)
 				return (0);
 			p = 0;
+			ft_putendl("back to 0..");
 		}
 		p++;
 		steps++;
 	}
+	ft_putendl("exit sort_a..");
 	return (1);
 }

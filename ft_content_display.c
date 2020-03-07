@@ -3,11 +3,15 @@
 int		ft_disp(char **st)
 {
 	int		p;
+	int		dc;
 
 	if (st == NULL)
 		return (0);
+	dc = 0;
+	while (st[dc])
+		dc++;
 	p = 0;
-	while (st[p])
+	while (p < dc)
 	{
 		//ft_putstr("\033[0;32m");
 		ft_putendl(st[p++]);
@@ -19,12 +23,16 @@ int		ft_disp(char **st)
 int		ft_disp_t(char **st)
 {
 	int		p;
+	int		dc;
 	char	**s;
 
 	if (st == NULL)
 		return (0);
+	dc = 0;
+	while (st[dc])
+		dc++;
 	p = 0;
-	while (st[p])
+	while (p < dc)
 	{
 		s = ft_strsplit(st[p],'`');
 		ft_putendl(s[0]);
@@ -43,6 +51,7 @@ int		ft_disp_r(char **st)
 	p = 0;
 	while (st[p])
 		p++;
+	p--;
 	while (p >= 0)
 		ft_putendl(st[p--]);
 	return (1);

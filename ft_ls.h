@@ -24,11 +24,11 @@
 # include <pwd.h>
 # include <grp.h>
 
-int		ft_sorter(char **s);
-int     ft_sorter_l(char **s);
-int     ft_sorter_t(char **s);
+int		ft_sorter(char **s, char **dir, int k);
+int     ft_sorter_l(char **s, char **dir);
+int     ft_sorter_t(char **s, char **dir);
 int		ft_array_swap(char *s1, char *s2);
-char    **ft_diff_flag(char **s, int k);
+char    **ft_diff_flag(char **dir, int k);
 int		ft_content_display(char **s, int k);
 int		ft_dir_count(char **dir, int k);
 char	**ft_dir_copy(char **dir, int k);

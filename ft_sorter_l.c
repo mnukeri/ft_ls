@@ -12,16 +12,18 @@
 
 #include "ft_ls.h"
 
-int			ft_sorter_l(char **s)
+int			ft_sorter_l(char **s, char **dir)
 {
 	int		p;
 	int		n;
+	int		dc;
 	char	**s1;
 	char	**s2;
 	int		steps;
 
 	if (s == NULL)
 		return (0);
+	dc = ft_dir_count(dir, 2);
 	p = 1;
 	steps = 0;
 	while (s[p])
