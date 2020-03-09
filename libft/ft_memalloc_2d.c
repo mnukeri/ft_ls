@@ -2,9 +2,9 @@
 
 void	**ft_memalloc_2d(size_t size)
 {
-	char	**s;
+	unsigned char	**s;
 
-	s = (char **)malloc(sizeof(char *) * size);
+	s = (unsigned char **)malloc(sizeof(unsigned char *) * size);
 	if (s == NULL)
 		return (NULL);
 	ft_memset(s, 0, size);

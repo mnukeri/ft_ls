@@ -173,17 +173,20 @@ char    **ft_k_1(char **str, int dc) //-a
     DIR             *pDir;
     char            **s;
     int             m;
+	int				len;
 
 	if (!str)
 		return (0);
      if (!(s = (char**)ft_memalloc_2d(dc + 1)))
         return (0);
+	len = ft_dir_strlen(str);
     if ((pDir = opendir(*str)) == NULL)
         return (0);
     m = 0;
+	ft_putendl("fk1:");
 	while ((pDirent = readdir(pDir)) != NULL)
     {
-        if (!(s[m] = ft_memalloc(ft_strlen(pDirent->d_name) + 1)))
+        if (!(s[m] = ft_memalloc(len + 1)))
             return (0);
         ft_strcpy(s[m], (char*)pDirent->d_name);
 		ft_putendl(s[m]);

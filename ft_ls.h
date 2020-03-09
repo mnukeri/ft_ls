@@ -39,5 +39,6 @@ int     ft_dir_check(char *st);
 int     ls_process_R(char **dir);
 //int     ft_flag_L(char **dir);
 char    *ft_pr_perm(unsigned int perms, int direc);
+int     ft_dir_strlen(char **dir);
 
 #endif
