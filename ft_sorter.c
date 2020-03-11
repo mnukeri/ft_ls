@@ -22,36 +22,22 @@ int			ft_sorter(char **s, char **dir, int k)
 	if (s == NULL)
 		return (0);
 	dc = ft_dir_count(dir, k);
-	ft_putstr("dc_a: ");
+	ft_putstr("dc_sorter: ");
 	ft_putnbr(dc);
 	ft_putchar('\n');
 	p = 1;
 	steps = 0;
 	while (s[p]) //keeps seg'ing when reaches fcd.o
 	{
-		/*ft_putstr("dc: ");
-		ft_putstr(ft_itoa(dc));*/
 		n = ft_strcmp(s[p - 1], s[p]);
-		/*ft_putstr("\t| n: ");
-		ft_putnbr(n);
-		ft_putstr("| p: ");
-		ft_putnbr(p - 1);
-		ft_putchar(' ');
-		ft_putstr(ft_itoa(p));
-		ft_putstr("\t| s[p-1]: ");
-		ft_putstr(s[p - 1]);
-		ft_putstr("\t| s[p]: ");
-		ft_putendl(s[p]);*/
 		if (n == 1)
 		{
 			if (ft_array_swap(s[p - 1], s[p]) != 1)
 				return (0);
 			p = 0;
-			//ft_putendl("back to 0..");
 		}
 		p++;
 		steps++;
 	}
-	//ft_putendl("exit sort_a..");
 	return (1);
 }

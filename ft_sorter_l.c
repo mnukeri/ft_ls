@@ -24,13 +24,16 @@ int			ft_sorter_l(char **s, char **dir)
 	if (s == NULL)
 		return (0);
 	dc = ft_dir_count(dir, 2);
+	ft_putstr("dc_sorter_l: ");
+	ft_putnbr(dc);
+	ft_putchar('\n');
 	p = 1;
 	steps = 0;
 	while (s[p])
 	{
-		s1 = ft_strsplit(s[p - 1],' ');
-		s2 = ft_strsplit(s[p],' ');
-		n = ft_strcmp(s1[8], s2[8]);
+		s1 = ft_strsplit(s[p - 1],'`');
+		s2 = ft_strsplit(s[p],'`');
+		n = ft_strcmp(s1[6], s2[6]);
 		if (n == 1)
 		{
 			if (ft_array_swap(s[p - 1], s[p]) != 1)

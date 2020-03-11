@@ -27,7 +27,6 @@ int		ls_process(char **dir, int k)
 		return (0);
 	}
 
-	//code is seg'ing from here on MAC;
 	if (k == 3)
 	{
 		if (ft_sorter_t(s, dir) != 1)
@@ -53,7 +52,7 @@ int		ls_process(char **dir, int k)
 		}
 	}
 	
-	ft_putendl("starting fcd..");
+	//ft_putendl("starting fcd..");
 	if (ft_content_display(s, k) != 1)
 	{
 		ft_putendl("Could not display elements after sorting, harde ntwana;");

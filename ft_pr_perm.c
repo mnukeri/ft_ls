@@ -9,9 +9,6 @@ char        *ft_pr_perm(unsigned int perms, int direc)
     char            *perm_arr;
     char            *finperms;
 
-    ft_putstr("perms: ");
-    ft_putnbr(perms);
-    ft_putstr("|");
     if (!(bin = ft_memalloc_int(17)))
         return (NULL);
     ft_memset_int(bin,0,17);
@@ -39,9 +36,6 @@ char        *ft_pr_perm(unsigned int perms, int direc)
     k = 0;
     p = 7;
     bin[p] = (direc == 1) ? 1 : 0;
-    ft_putstr(" bin[7]: ");
-    ft_putnbr(bin[p]);
-    ft_putendl("|");
     while (p < 17)
     {
         if (bin[p] == 1)

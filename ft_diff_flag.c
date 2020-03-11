@@ -72,7 +72,7 @@ char		**ft_k_3(char **str, int dc) //-t
 	return (s);
 }
 
-int			ft_fcl(char **str)
+int			ft_cl_size(char **str)
 {
 	struct stat		filestat;
 	struct dirent	*pDirent;
@@ -94,6 +94,28 @@ int			ft_fcl(char **str)
 	return (len);
 }
 
+int			ft_cl_links(char **str)
+{
+	struct stat		filestat;
+	struct dirent	*pDirent;
+	DIR				*pDir;
+	int				len;
+
+	if (!str)
+		return (0);
+	if ((pDir = opendir(*str)) == NULL)
+		return (0);
+	len = 0;
+	while ((pDirent = readdir(pDir)) != NULL)
+	{
+		stat(pDirent->d_name,&filestat);
+		if (ft_dig(filestat.st_nlink) > len)
+			len = ft_dig(filestat.st_nlink);
+	}
+	closedir(pDir);
+	return (len);
+}
+
 char		**ft_k_2(char **str, int dc) //-l
 {
 	struct stat     filestat;
@@ -104,13 +126,15 @@ char		**ft_k_2(char **str, int dc) //-l
     int             k;
 	int				m;
 	int				fs_col_len;
+	int				fs_col_links;
     char            *st;
     char            **s;
 	char			*finperms;
 	
 	if (!str)
         return (0);
-	fs_col_len = ft_fcl(str);
+	fs_col_len = ft_cl_size(str);
+	fs_col_links = ft_cl_links(str);
 	if (!(s = (char**)ft_memalloc_2d(dc + 1)))
         return (0);
 	if ((pDir = opendir(*str)) == NULL)
@@ -118,33 +142,28 @@ char		**ft_k_2(char **str, int dc) //-l
 	m = 0;
     while ((pDirent = readdir(pDir)) != NULL)
     {
-        if (pDirent->d_name[0] == '.')
-        {
-            continue;
-        }
-        else
-        {
 			if (!(st = ft_strnew(1)))
 				return (0);
 			//find out why permissions are not printing anymore..
         	stat(pDirent->d_name, &filestat);
 			k = (S_ISDIR(filestat.st_mode)) ? 1 : 0;
-			ft_putstr("k: ");
-			ft_putnbr(k);
-			ft_putendl("|");
 			finperms = ft_pr_perm(filestat.st_mode,k);
-			ft_putstr("finperms: ");
-			ft_putendl(finperms);
         	st = ft_strjoin(st, finperms);
-        	st = ft_strjoin(st," ");
+        	st = ft_strjoin(st,"`");
+			k = ft_dig(filestat.st_nlink);
+			while (k <= fs_col_links)
+			{
+				st = ft_strjoin(st," ");
+				k++;
+			}
 			st = ft_strjoin(st, ft_itoa(filestat.st_nlink));
-        	st = ft_strjoin(st," ");
+        	st = ft_strjoin(st,"`");
 			info = getpwuid(filestat.st_uid);
         	st = ft_strjoin(st, info->pw_name);
-        	st = ft_strjoin(st," ");
+        	st = ft_strjoin(st,"`");
 			info_g = getgrgid(filestat.st_gid);
         	st = ft_strjoin(st, info_g->gr_name);
-        	//st = ft_strjoin(st," ");
+        	st = ft_strjoin(st,"`");
 			k = ft_dig(filestat.st_size);
 			while (k <= fs_col_len)
 			{
@@ -152,16 +171,14 @@ char		**ft_k_2(char **str, int dc) //-l
 				k++;
 			}
         	st = ft_strjoin(st , ft_itoa(filestat.st_size));
-        	st = ft_strjoin(st," ");
+        	st = ft_strjoin(st,"`");
         	st = ft_strjoin(st, ft_strsub(ctime(&filestat.st_mtime),4,12));
-        	st = ft_strjoin(st," ");
+        	st = ft_strjoin(st,"`");
         	st = ft_strjoin(st, (char*)pDirent->d_name);
-			//since s is a **, try storing each thing in its own lot..
 			if (!(s[m] = ft_memalloc(ft_strlen(st) + 1)))
 				return (0);
 			ft_strcpy(s[m], st);
 			m++;
-        }
     }
 	closedir(pDir);
 	return (s); 
@@ -202,27 +219,33 @@ char    **ft_k_0(char **str, int dc) //default
     DIR             *pDir;
     char    **s;
     int     m;
+	int		len;
 
 	if (str == NULL)
 		return (0);
     if (!(s = (char**)ft_memalloc_2d(dc + 1)))
         return (0);
+	len = ft_dir_strlen(str);
+	/*ft_putstr("len_mem: ");
+	ft_putnbr(len);
+	ft_putchar('\n');*/
     if ((pDir = opendir(*str)) == NULL)
         return (0);
     m = 0;
+	ft_putendl("fk0:");
 	while ((pDirent = readdir(pDir)) != NULL)
 	{
 		if (pDirent->d_name[0] != '.')
         {
-            if (!(s[m] = ft_memalloc(ft_strlen(pDirent->d_name))))
+            if (!(s[m] = ft_memalloc(len + 1)))
                 return (0);
-            s[m] = ft_strdup((char*)pDirent->d_name);
-			ft_putstr("s[");
+            ft_strcpy(s[m], (char*)pDirent->d_name);
+			/*ft_putstr("s[");
 			ft_putnbr(m);
 			ft_putstr("]: ");
 			ft_putstr(s[m]);
 			ft_putstr("| len: ");
-			ft_putendl(ft_itoa(ft_strlen(pDirent->d_name)));
+			ft_putendl(ft_itoa(ft_strlen(pDirent->d_name)));*/
         	m++;
         }
 	}
