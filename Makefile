@@ -14,8 +14,8 @@ NAME = ft_ls.a
 CC = gcc
 FLAG = -Wall -Werror -Wextra
 ARC = ar rc
-SRC = ft_sorter.c ft_array_swap.c ft_content_display.c ft_dir_count.c ft_dir_copy.c ls_process.c flag_checker.c path_checker.c ft_dir_check.c ls_process_R.c ft_pr_perm.c ft_diff_flag.c ft_sorter_l.c ft_sorter_t.c ft_dir_strlen.c
-OBJ = ft_sorter.o ft_array_swap.o ft_content_display.o ft_dir_count.o ft_dir_copy.o ls_process.o flag_checker.o path_checker.o ft_dir_check.o ls_process_R.o ft_pr_perm.o ft_diff_flag.o ft_sorter_l.o ft_sorter_t.o ft_dir_strlen.o
+SRC = ft_sorter.c ft_array_swap.c ft_content_display.c ft_dir_count.c ft_dir_copy.c ls_process.c flag_checker.c path_checker.c ft_dir_check.c ls_process_R.c ft_pr_perm.c ft_diff_flag.c ft_sorter_l.c ft_sorter_t.c ft_dir_strlen.c ft_dir_count_hid.c
+OBJ = ft_sorter.o ft_array_swap.o ft_content_display.o ft_dir_count.o ft_dir_copy.o ls_process.o flag_checker.o path_checker.o ft_dir_check.o ls_process_R.o ft_pr_perm.o ft_diff_flag.o ft_sorter_l.o ft_sorter_t.o ft_dir_strlen.o ft_dir_count_hid.o
 
 # all: ${NAME}
 

@@ -19,11 +19,12 @@ int		ls_process_R(char **dir)
 
 	if (dir == NULL)
 		return (0);
-	if ((dir_count = ft_dir_count(dir, 5)) < 1)
+	if ((dir_count = ft_dir_count(dir)) < 2)
 	{
 		ft_putendl("Could not count elements in directory, harde ntwana;");
 		return (0);
 	}
+	ft_putendl("we're here..");
 	if (!(s = ft_dir_copy(dir, dir_count)))
 	{
 		ft_putendl("Could not copy elements into array, harde ntwana;");
@@ -34,7 +35,7 @@ int		ls_process_R(char **dir)
 		ft_putendl("Could not sort array of directory elements, harde ntwana;");
 		return (0);
 	}*/
-	if (ft_content_display(s,0) != 1)
+	if (ft_content_display(s,dir,0) != 1)
 	{
 		ft_putendl("Could not display elements after sorting, harde ntwana;");
 		return (0);

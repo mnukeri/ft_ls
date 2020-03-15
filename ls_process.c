@@ -53,7 +53,7 @@ int		ls_process(char **dir, int k)
 	}
 	
 	//ft_putendl("starting fcd..");
-	if (ft_content_display(s, k) != 1)
+	if (ft_content_display(s, dir, k) != 1)
 	{
 		ft_putendl("Could not display elements after sorting, harde ntwana;");
 		return (0);

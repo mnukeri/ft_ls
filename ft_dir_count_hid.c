@@ -12,21 +12,20 @@
 
 #include "ft_ls.h"
 
-int			ft_dir_count(char **dir)
+int			ft_dir_count_hid(char **dir)
 {
 	struct dirent	*pDirent;
 	DIR				*pDir;
 	int				l;
 
-	if (!dir)
-		return (0);
-	ft_putendl("fdc start..");
-	ft_putchar(dir[0][0]);
 	if ((pDir = opendir(*dir)) == NULL)
 		return (0);
 	l = 0;
 	while ((pDirent = readdir(pDir)) != NULL)
-		l += 1;
+	{
+		if (pDirent->d_name[0] == '.')
+			l += 1;
+	}
 	closedir(pDir);
 	return (l);
 }

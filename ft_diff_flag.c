@@ -1,37 +1,36 @@
 #include "ft_ls.h"
 
-char		**ft_k_5(char **str) //-R
+char		**ft_k_5(char **dir) //-R
 {
 	struct dirent	*pDirent;
 	DIR				*pDir;
 
-	if (!str)
+	if (!dir)
 		return (NULL);
-	if ((pDir = opendir(*str)) == NULL)
+	if ((pDir = opendir(*dir)) == NULL)
 		return (0);
+	ft_putendl("fk5:");
 	while ((pDirent = readdir(pDir)) != NULL)
 	{
-		/*if (str[p][1] == '.')
-			p++;
-		if (ft_strlen(str[p]) > 1 && str[p][0] == '.')
-			p++;*/
 		if (ft_dir_check(pDirent->d_name) == 1)
 		{
 			ft_putstr(pDirent->d_name);
 			ft_putendl(":");
 			ft_putendl("***   ***   ***");
-			ls_process_R((char**)pDirent->d_name);
+			ls_process_R((char**)pDirent->d_name);// cannot be passing a char**, change it and see..
 			//add recursion..
 			ft_putendl("***   ***   ***");
 			ft_putchar('\n');
 			ft_putchar('\n');
 		}
+		else
+			ft_putendl(pDirent->d_name);
 	}
 	closedir(pDir);
 	return (0);
 }
 
-char		**ft_k_3(char **str, int dc) //-t
+char		**ft_k_3(char **dir, int dc) //-t
 {
 	struct stat		filestat;
 	struct dirent	*pDirent;
@@ -40,48 +39,46 @@ char		**ft_k_3(char **str, int dc) //-t
 	char			**s;
 	char			*st;
 
-	if (!str)
+	if (!dir)
 		return (0);
 	if (!(s = (char**)ft_memalloc_2d(dc + 1)))
 		return (0);
-	if ((pDir = opendir(*str)) == NULL)
+	if ((pDir = opendir(*dir)) == NULL)
 		return (0);
 	m = 0;
+	ft_putendl("fk3:");
 	while ((pDirent = readdir(pDir)) != NULL)
 	{
-		if (pDirent->d_name[0] != '.')
-		{
 			stat(pDirent->d_name, &filestat);
 			st = ft_strnew(1);
 			st = ft_strjoin(st, (char*)pDirent->d_name);
 			st = ft_strjoin(st, "`");
 			st = ft_strjoin(st, ft_itoa(filestat.st_mtime));
 			st = ft_strjoin(st, "`");
-			st = ft_strjoin(st, ctime(&filestat.st_mtime));
-			ft_putstr("st: ");
+			st = ft_strjoin(st, ft_strsub(ctime(&filestat.st_mtime), 4, 12));
+			/*ft_putstr("st: ");
 			ft_putstr(st);
-			ft_putendl("|");
+			ft_putendl("|");*/
 			if (!(s[m] = ft_memalloc(ft_strlen(st) + 1)))
 				return (0);
 			ft_strcpy(s[m], st);
 			m++;
 			ft_strclr(st);
-		}
 	}
 	closedir(pDir);
 	return (s);
 }
 
-int			ft_cl_size(char **str)
+int			ft_cl_size(char **dir)
 {
 	struct stat		filestat;
 	struct dirent	*pDirent;
 	DIR				*pDir;
 	int				len;
 
-	if (!str)
+	if (!dir)
 		return (0);
-	if ((pDir = opendir(*str)) == NULL)
+	if ((pDir = opendir(*dir)) == NULL)
 		return (0);
 	len = 0;
 	while ((pDirent = readdir(pDir)) != NULL)
@@ -94,16 +91,16 @@ int			ft_cl_size(char **str)
 	return (len);
 }
 
-int			ft_cl_links(char **str)
+int			ft_cl_links(char **dir)
 {
 	struct stat		filestat;
 	struct dirent	*pDirent;
 	DIR				*pDir;
 	int				len;
 
-	if (!str)
+	if (!dir)
 		return (0);
-	if ((pDir = opendir(*str)) == NULL)
+	if ((pDir = opendir(*dir)) == NULL)
 		return (0);
 	len = 0;
 	while ((pDirent = readdir(pDir)) != NULL)
@@ -116,7 +113,7 @@ int			ft_cl_links(char **str)
 	return (len);
 }
 
-char		**ft_k_2(char **str, int dc) //-l
+char		**ft_k_2(char **dir, int dc) //-l
 {
 	struct stat     filestat;
 	struct passwd	*info;
@@ -131,15 +128,16 @@ char		**ft_k_2(char **str, int dc) //-l
     char            **s;
 	char			*finperms;
 	
-	if (!str)
+	if (!dir)
         return (0);
-	fs_col_len = ft_cl_size(str);
-	fs_col_links = ft_cl_links(str);
+	fs_col_len = ft_cl_size(dir);
+	fs_col_links = ft_cl_links(dir);
 	if (!(s = (char**)ft_memalloc_2d(dc + 1)))
         return (0);
-	if ((pDir = opendir(*str)) == NULL)
+	if ((pDir = opendir(*dir)) == NULL)
         return (0);
 	m = 0;
+	ft_putendl("fk2:");
     while ((pDirent = readdir(pDir)) != NULL)
     {
 			if (!(st = ft_strnew(1)))
@@ -184,7 +182,7 @@ char		**ft_k_2(char **str, int dc) //-l
 	return (s); 
 }
 
-char    **ft_k_1(char **str, int dc) //-a
+char    **ft_k_1(char **dir, int dc) //-a
 {
     struct dirent   *pDirent;
     DIR             *pDir;
@@ -192,12 +190,12 @@ char    **ft_k_1(char **str, int dc) //-a
     int             m;
 	int				len;
 
-	if (!str)
+	if (!dir)
 		return (0);
-     if (!(s = (char**)ft_memalloc_2d(dc + 1)))
-        return (0);
-	len = ft_dir_strlen(str);
-    if ((pDir = opendir(*str)) == NULL)
+	if (!(s = (char**)ft_memalloc_2d(dc + 1)))
+		return (0);
+	len = ft_dir_strlen(dir);
+    if ((pDir = opendir(*dir)) == NULL)
         return (0);
     m = 0;
 	ft_putendl("fk1:");
@@ -209,11 +207,12 @@ char    **ft_k_1(char **str, int dc) //-a
 		ft_putendl(s[m]);
         m++;
     }
+	ft_putchar('\n');
 	closedir(pDir);
 	return (s);
 }
 
-char    **ft_k_0(char **str, int dc) //default
+char    **ft_k_0(char **dir, int dc) //default
 {
     struct dirent   *pDirent;
     DIR             *pDir;
@@ -221,22 +220,17 @@ char    **ft_k_0(char **str, int dc) //default
     int     m;
 	int		len;
 
-	if (str == NULL)
+	if (dir == NULL)
 		return (0);
-    if (!(s = (char**)ft_memalloc_2d(dc + 1)))
-        return (0);
-	len = ft_dir_strlen(str);
-	/*ft_putstr("len_mem: ");
-	ft_putnbr(len);
-	ft_putchar('\n');*/
-    if ((pDir = opendir(*str)) == NULL)
+	if (!(s = (char**)ft_memalloc_2d(dc + 1)))
+		return (0);
+	len = ft_dir_strlen(dir);
+    if ((pDir = opendir(*dir)) == NULL)
         return (0);
     m = 0;
 	ft_putendl("fk0:");
 	while ((pDirent = readdir(pDir)) != NULL)
 	{
-		if (pDirent->d_name[0] != '.')
-        {
             if (!(s[m] = ft_memalloc(len + 1)))
                 return (0);
             ft_strcpy(s[m], (char*)pDirent->d_name);
@@ -247,7 +241,6 @@ char    **ft_k_0(char **str, int dc) //default
 			ft_putstr("| len: ");
 			ft_putendl(ft_itoa(ft_strlen(pDirent->d_name)));*/
         	m++;
-        }
 	}
 	closedir(pDir);
     return (s);
@@ -262,7 +255,9 @@ char		**ft_diff_flag(char **dir, int k)
 
 	if (dir == NULL || k < 0 || k > 5)
 		return (0);
-	dir_count = ft_dir_count(dir, k);
+	dir_count = ft_dir_count(dir);
+	ft_putstr("fdf_dc: ");
+	ft_putendl(ft_itoa(dir_count));
 	if (k == 0 || k == 4)//default
 		finstr = ft_k_0(dir, dir_count);
 	if (k == 1)//-a
