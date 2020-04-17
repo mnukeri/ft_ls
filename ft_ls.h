@@ -24,22 +24,24 @@
 # include <pwd.h>
 # include <grp.h>
 
+int		flag_checker(char **input);
+char	*path_checker(char **input);
+int		ls_process(char **dir, int k);
+int     ls_process_R(char **dir);
+char    **ft_diff_flag(char **dir, int k);
+int     ft_dir_check(char *st);
+int		ft_array_swap(char *s1, char *s2);
+int		ft_dir_count(char **dir);
+int     ft_dir_count_R(char **dir);
+int     ft_dir_count_hid(char **dir);
+char	**ft_dir_copy(char **dir, int k);
+char    *ft_pr_perm(unsigned int perms, int direc);
+int     ft_dir_strlen(char **dir);
 int		ft_sorter(char **s, char **dir, int k);
 int     ft_sorter_l(char **s, char **dir);
 int     ft_sorter_t(char **s, char **dir);
-int		ft_array_swap(char *s1, char *s2);
-char    **ft_diff_flag(char **dir, int k);
 int		ft_content_display(char **s, char **dir, int k);
-int		ft_dir_count(char **dir);
-int     ft_dir_count_hid(char **dir);
-char	**ft_dir_copy(char **dir, int k);
-int		ls_process(char **dir, int k);
-int		flag_checker(char **input);
-char	*path_checker(char **input);
-int     ft_dir_check(char *st);
-int     ls_process_R(char **dir);
+int     ft_pDirent_reader(DIR *pDir);
 //int     ft_flag_L(char **dir);
-char    *ft_pr_perm(unsigned int perms, int direc);
-int     ft_dir_strlen(char **dir);
 
 #endif

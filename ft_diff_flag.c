@@ -1,14 +1,20 @@
 #include "ft_ls.h"
 
-char		**ft_k_5(char **dir) //-R
+char		**ft_k_5(char **dir) //-R : create file descriptors for each dir and its contents will be split from a string, e.g. the '-l' flag;
 {
-	struct dirent	*pDirent;
-	DIR				*pDir;
+	//struct dirent	*pDirent;
+	//DIR				*pDir;
+	//int				R_count;
 
-	if (!dir)
+	if (ls_process_R(dir) != 1)
+		return (0);
+	/*if (!dir)
 		return (NULL);
 	if ((pDir = opendir(*dir)) == NULL)
 		return (0);
+	//R_count = ft_dir_count_R(dir);
+	ft_putstr("R_count: //");
+	//ft_putendl(ft_itoa(R_count));
 	ft_putendl("fk5:");
 	while ((pDirent = readdir(pDir)) != NULL)
 	{
@@ -17,16 +23,18 @@ char		**ft_k_5(char **dir) //-R
 			ft_putstr(pDirent->d_name);
 			ft_putendl(":");
 			ft_putendl("***   ***   ***");
-			ls_process_R((char**)pDirent->d_name);// cannot be passing a char**, change it and see..
+			if (ft_pDirent_reader(**pDir) != 1)
+				return (0);
+			// cannot be passing a char**, change it and see..
 			//add recursion..
 			ft_putendl("***   ***   ***");
-			ft_putchar('\n');
 			ft_putchar('\n');
 		}
 		else
 			ft_putendl(pDirent->d_name);
 	}
 	closedir(pDir);
+	ft_putendl("we're done...");*/
 	return (0);
 }
 
@@ -204,10 +212,9 @@ char    **ft_k_1(char **dir, int dc) //-a
         if (!(s[m] = ft_memalloc(len + 1)))
             return (0);
         ft_strcpy(s[m], (char*)pDirent->d_name);
-		ft_putendl(s[m]);
+		//ft_putendl(s[m]);
         m++;
     }
-	ft_putchar('\n');
 	closedir(pDir);
 	return (s);
 }
@@ -256,8 +263,8 @@ char		**ft_diff_flag(char **dir, int k)
 	if (dir == NULL || k < 0 || k > 5)
 		return (0);
 	dir_count = ft_dir_count(dir);
-	ft_putstr("fdf_dc: ");
-	ft_putendl(ft_itoa(dir_count));
+	/*ft_putstr("fdf_dc: ");
+	ft_putendl(ft_itoa(dir_count));*/
 	if (k == 0 || k == 4)//default
 		finstr = ft_k_0(dir, dir_count);
 	if (k == 1)//-a

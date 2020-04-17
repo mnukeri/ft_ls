@@ -8,10 +8,10 @@ int		ft_disp(char **st, char **dir)
 	if (st == NULL)
 		return (0);
 	dc = ft_dir_count(dir);
-	ft_putstr("fcd_default_dc: ");
-	ft_putendl(ft_itoa(dc));
+	/*ft_putstr("fcd_default_dc: ");
+	ft_putendl(ft_itoa(dc));*/
 	p = 0;
-	while (p < dc)
+	while (p < dc && st[p])
 	{
 		//ft_putstr("\033[0;32m");
 		if (st[p][0] != '.')
@@ -33,7 +33,7 @@ int		ft_disp_a(char **st, char **dir)
 	ft_putstr("fcd_a_dc: ");
 	ft_putendl(ft_itoa(dc));
 	p = 0;
-	while (p < dc)
+	while (p < dc && st[p])
 		ft_putendl(st[p++]);
 	return (1);
 }
@@ -47,10 +47,10 @@ int		ft_disp_ti(char **st, char **dir)
 	if (st == NULL)
 		return (0);
 	dc = ft_dir_count(dir);
-	ft_putstr("fcd_ti_dc: ");
+	ft_putstr("fcd_t_dc: ");
 	ft_putendl(ft_itoa(dc));
 	p = 0;
-	while (p < dc)
+	while (p < dc && st[p])
 	{
 		if (st[p][0] != '.')
 		{
@@ -73,7 +73,7 @@ int		ft_disp_r(char **st, char **dir)
 	ft_putstr("fcd_r_dc: ");
 	ft_putendl(ft_itoa(dc));
 	dc -= 1;
-	while (dc >= 0)
+	while (dc >= 0 && st[dc])
 	{
 		if (st[dc][0] != '.')
 			ft_putendl(st[dc]);
@@ -94,7 +94,7 @@ int		ft_fst(char **st, char **dir)
 	dc = ft_dir_count(dir);
 	f_total = 0;
 	p = 0;
-	while (p < dc)
+	while (p < dc && st[p])
 	{
 		s = ft_strsplit(st[p],'`');
 		f_total += ft_atoi(s[4]);
@@ -117,10 +117,10 @@ int		ft_disp_l(char **st, char **dir)
 	ft_putstr("total: ");
 	ft_putendl(ft_itoa(k));
 	dc = ft_dir_count(dir);
-	ft_putstr("fdl_dc: ");
+	ft_putstr("fcd_l_dc: ");
 	ft_putendl(ft_itoa(dc));
 	p = 0;
-	while (p < dc)
+	while (p < dc && st[p])
 	{
 		s = ft_strsplit(st[p],'`');
 		if (s[6][0] != '.')
