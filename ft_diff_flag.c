@@ -1,42 +1,11 @@
 #include "ft_ls.h"
 
-char		**ft_k_5(char **dir) //-R : create file descriptors for each dir and its contents will be split from a string, e.g. the '-l' flag;
+/*char		**ft_k_5(char **dir) //-R
 {
-	//struct dirent	*pDirent;
-	//DIR				*pDir;
-	//int				R_count;
-
 	if (ls_process_R(dir) != 1)
 		return (0);
-	/*if (!dir)
-		return (NULL);
-	if ((pDir = opendir(*dir)) == NULL)
-		return (0);
-	//R_count = ft_dir_count_R(dir);
-	ft_putstr("R_count: //");
-	//ft_putendl(ft_itoa(R_count));
-	ft_putendl("fk5:");
-	while ((pDirent = readdir(pDir)) != NULL)
-	{
-		if (ft_dir_check(pDirent->d_name) == 1)
-		{
-			ft_putstr(pDirent->d_name);
-			ft_putendl(":");
-			ft_putendl("***   ***   ***");
-			if (ft_pDirent_reader(**pDir) != 1)
-				return (0);
-			// cannot be passing a char**, change it and see..
-			//add recursion..
-			ft_putendl("***   ***   ***");
-			ft_putchar('\n');
-		}
-		else
-			ft_putendl(pDirent->d_name);
-	}
-	closedir(pDir);
-	ft_putendl("we're done...");*/
 	return (0);
-}
+}*/
 
 char		**ft_k_3(char **dir, int dc) //-t
 {
@@ -153,9 +122,14 @@ char		**ft_k_2(char **dir, int dc) //-l
 			//find out why permissions are not printing anymore..
         	stat(pDirent->d_name, &filestat);
 			k = (S_ISDIR(filestat.st_mode)) ? 1 : 0;
+			/*ft_putstr(pDirent->d_name);
+			ft_putstr("\tk: ");
+			ft_putstr(ft_itoa(k));*/
 			finperms = ft_pr_perm(filestat.st_mode,k);
         	st = ft_strjoin(st, finperms);
         	st = ft_strjoin(st,"`");
+			//ft_putstr("st: ");
+			//ft_putendl(st);
 			k = ft_dig(filestat.st_nlink);
 			while (k <= fs_col_links)
 			{
@@ -181,9 +155,11 @@ char		**ft_k_2(char **dir, int dc) //-l
         	st = ft_strjoin(st, ft_strsub(ctime(&filestat.st_mtime),4,12));
         	st = ft_strjoin(st,"`");
         	st = ft_strjoin(st, (char*)pDirent->d_name);
+			//ft_putendl("we're here..");
 			if (!(s[m] = ft_memalloc(ft_strlen(st) + 1)))
 				return (0);
 			ft_strcpy(s[m], st);
+			//ft_putendl(s[m]);
 			m++;
     }
 	closedir(pDir);
@@ -273,7 +249,7 @@ char		**ft_diff_flag(char **dir, int k)
 		finstr = ft_k_2(dir, dir_count);
 	if (k == 3)//-t
 		finstr = ft_k_3(dir, dir_count);
-	if (k == 5)//-R
-		finstr = ft_k_5(dir);
+	//if (k == 5)//-R
+		//finstr = ft_k_5(dir);
 	return (finstr);
 }

@@ -20,6 +20,7 @@ int		ls_process_R(char **dir)
 	char			**s;
 	int				len;
 	int				m;
+	//int				k;
 
 	if (!dir)
 		return (0);
@@ -36,14 +37,26 @@ int		ls_process_R(char **dir)
 			continue ;
 		if (pDirent->d_name[0] == '.')
 			continue ;
-		if (ft_dir_check(pDirent->d_name) == 1)
+		/*k = (pDirent->d_type == DT_DIR) ? 1 : 0;
+		ft_putstr("ft_dir_check--\t");
+		ft_putstr(pDirent->d_name);
+		ft_putstr(": ");
+		ft_putendl(ft_itoa(k));*/
+		if (pDirent->d_type == DT_DIR)
 		{
+			if (!(s[m] = ft_memalloc(len + 1)))
+				return (0);
 			st1 = ft_strnew(ft_strlen(*dir));
 			st1 = ft_strcpy(st1, *dir);
 			st1 = ft_strjoin(st1, "/");
 			st1 = ft_strjoin(st1, pDirent->d_name);
+			//ft_putstr("jumping into rec. loop +1: ");
 			if (ls_process_R(&st1) != 1)
 				return (0);
+			if (!(s[m] = ft_memalloc(len + 1)))
+				return (0);
+			ft_strcpy(s[m], (char*)pDirent->d_name);
+			m++;
 			ft_strclr(st1);
 		}
 		else

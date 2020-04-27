@@ -29,7 +29,7 @@ char	*path_checker(char **input);
 int		ls_process(char **dir, int k);
 int     ls_process_R(char **dir);
 char    **ft_diff_flag(char **dir, int k);
-int     ft_dir_check(char *st);
+int     ft_dir_check(const char *st);
 int		ft_array_swap(char *s1, char *s2);
 int		ft_dir_count(char **dir);
 int     ft_dir_count_R(char **dir);
