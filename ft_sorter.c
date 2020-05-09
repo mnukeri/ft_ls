@@ -23,9 +23,6 @@ int			ft_sorter(char **s, char **dir, int k)
 		return (0);
 	k /= 2;
 	dc = ft_dir_count(dir);
-	/*ft_putstr("dc_sorter: ");
-	ft_putnbr(dc);
-	ft_putchar('\n');*/
 	p = 1;
 	steps = 0;
 	while (p < dc && s[p])
@@ -33,19 +30,8 @@ int			ft_sorter(char **s, char **dir, int k)
 		n = ft_strcmp(s[p - 1], s[p]);
 		if (n == 1)
 		{
-			/*ft_putstr("Before -- s1: ");
-			ft_putstr(s[p - 1]);
-			ft_putstr("\t| st2: ");
-			ft_putstr(s[p]);
-			ft_putendl("\t|");*/
 			if (ft_array_swap(s[p - 1], s[p]) != 1)
 				return (0);
-			/*ft_putstr("After -- s1: ");
-			ft_putstr(s[p - 1]);
-			ft_putstr("\t| st2: ");
-			ft_putstr(s[p]);
-			ft_putendl("\t|");
-			ft_putchar('\n');*/
 			p = 0;
 		}
 		p++;
