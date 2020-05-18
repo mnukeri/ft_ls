@@ -1,11 +1,45 @@
 #include "ft_ls.h"
 
-/*char		**ft_k_5(char **dir) //-R
+char		**ft_k_5(char **dir) //-R
 {
-	if (ls_process_R(dir) != 1)
+	char	**s;
+	char	**s1;
+	int		p;
+	int		len;
+	int		*m;
+
+	if (dir == NULL)
 		return (0);
-	return (0);
-}*/
+	if (!(s1 = (char**)ft_memalloc_2d(ls_process_R_count(dir) + 1)))
+		return (0);
+	p = 0;
+	m = &p;
+	if (ls_process_R(dir, s1, m) != 1)
+		return (0);
+	++(*m);
+	s1[*m] = NULL;
+	p = 0;
+	len = 0;
+	while (s1[p])
+	{
+		if (ft_strlen(s1[p]) > (size_t)len)
+			len = ft_strlen(s1[p]);
+		p++;
+	}
+	if (!(s = (char**)ft_memalloc_2d(ls_process_R_count(dir) + 1)))
+		return (0);
+	p = 0;
+	while (p < ls_process_R_count(dir) && s1[p])
+	{
+		if (!(s[p] = ft_memalloc(len + 1)))
+			return (0);
+		ft_strcpy(s[p], s1[p]);
+		p++;
+	}
+	//s[p] = NULL;
+	ft_strdel(s1);
+	return (s);
+}
 
 char		**ft_k_3(char **dir, int dc) //-t
 {
@@ -122,14 +156,9 @@ char		**ft_k_2(char **dir, int dc) //-l
 			//find out why permissions are not printing anymore..
         	stat(pDirent->d_name, &filestat);
 			k = (S_ISDIR(filestat.st_mode)) ? 1 : 0;
-			/*ft_putstr(pDirent->d_name);
-			ft_putstr("\tk: ");
-			ft_putstr(ft_itoa(k));*/
 			finperms = ft_pr_perm(filestat.st_mode,k);
         	st = ft_strjoin(st, finperms);
         	st = ft_strjoin(st,"`");
-			//ft_putstr("st: ");
-			//ft_putendl(st);
 			k = ft_dig(filestat.st_nlink);
 			while (k <= fs_col_links)
 			{
@@ -160,8 +189,10 @@ char		**ft_k_2(char **dir, int dc) //-l
 				return (0);
 			ft_strcpy(s[m], st);
 			//ft_putendl(s[m]);
+			//ft_putendl(ft_itoa(m));
 			m++;
     }
+	s[m] = NULL;
 	closedir(pDir);
 	return (s); 
 }
@@ -249,7 +280,7 @@ char		**ft_diff_flag(char **dir, int k)
 		finstr = ft_k_2(dir, dir_count);
 	if (k == 3)//-t
 		finstr = ft_k_3(dir, dir_count);
-	//if (k == 5)//-R
-		//finstr = ft_k_5(dir);
+	if (k == 5)//-R
+		finstr = ft_k_5(dir);
 	return (finstr);
 }

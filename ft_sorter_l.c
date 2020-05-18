@@ -17,22 +17,22 @@ int			ft_sorter_l(char **s, char **dir)
 	int		p;
 	int		n;
 	int		dc;
-	char	**s1;
-	char	**s2;
+	char	**st1;
+	char	**st2;
 	int		steps;
 
 	if (s == NULL)
 		return (0);
 	dc = ft_dir_count(dir);
-	ft_putstr("dc_sorter_l: ");
-	ft_putendl(ft_itoa(dc));
 	p = 1;
 	steps = 0;
-	while (p < dc)
+	while (p < dc && s[p] != NULL)
 	{
-		s1 = ft_strsplit(s[p - 1],'`');
-		s2 = ft_strsplit(s[p],'`');
-		n = ft_strcmp(s1[6], s2[6]);
+		st1 = ft_strsplit(s[p - 1],'`');
+		st2 = ft_strsplit(s[p],'`');
+		n = ft_strcmp(st1[6], st2[6]);
+		ft_strdel(st1);
+		ft_strdel(st2);
 		if (n == 1)
 		{
 			if (ft_array_swap(s[p - 1], s[p]) != 1)
@@ -42,7 +42,5 @@ int			ft_sorter_l(char **s, char **dir)
 		p++;
 		steps++;
 	}
-	ft_strdel(s1);
-	ft_strdel(s2);
 	return (1);
 }

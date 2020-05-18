@@ -35,6 +35,7 @@ int		main(int argc, char **argv)
 		if (!path1)
 			return (0);
 	}
+	
 	if (ls_process(&path1, k) != 1)
 	{
 		ft_putendl("Could not complete the LS process, harde ntwana;");

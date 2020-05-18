@@ -18,7 +18,7 @@ int			ft_array_swap(char *s1, char *s2)
 
 	if (s1 == NULL || s2 == NULL)
 		return (0);
-	if (!(temp = ft_strnew(ft_strlen(s1) + 1)))
+	if (!(temp = ft_strnew(1)))
 		return (0);
 	ft_strcpy(temp, s1);
 	ft_strcpy(s1, s2);

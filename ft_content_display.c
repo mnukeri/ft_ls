@@ -8,16 +8,12 @@ int		ft_disp(char **st, char **dir)
 	if (st == NULL)
 		return (0);
 	dc = ft_dir_count(dir);
-	/*ft_putstr("fcd_default_dc: ");
-	ft_putendl(ft_itoa(dc));*/
 	p = 0;
 	while (p < dc && st[p])
 	{
-		//ft_putstr("\033[0;32m");
 		if (st[p][0] != '.')
 			ft_putendl(st[p]);
 		p++;
-		//ft_putstr("\033[0m");
 	}
 	return (1);
 }
@@ -30,8 +26,6 @@ int		ft_disp_a(char **st, char **dir)
 	if (!st || !dir)
 		return (0);
 	dc = ft_dir_count(dir);
-	ft_putstr("fcd_a_dc: ");
-	ft_putendl(ft_itoa(dc));
 	p = 0;
 	while (p < dc && st[p])
 		ft_putendl(st[p++]);
@@ -47,8 +41,6 @@ int		ft_disp_ti(char **st, char **dir)
 	if (st == NULL)
 		return (0);
 	dc = ft_dir_count(dir);
-	ft_putstr("fcd_t_dc: ");
-	ft_putendl(ft_itoa(dc));
 	p = 0;
 	while (p < dc && st[p])
 	{
@@ -82,6 +74,30 @@ int		ft_disp_r(char **st, char **dir)
 	return (1);
 }
 
+int		ft_disp_R(char **st, char **dir)
+{
+	int		p;
+	int		k;
+	char	**s;
+
+	if (!st || !dir)
+		return (0);
+	p = 0;
+	while (p < ls_process_R_count(dir) && st[p])
+	{
+		s = ft_strsplit(st[p],'`');
+		k = 0;
+		ft_putstr(s[k++]);
+		ft_putendl(":");
+		while (s[k])
+			ft_putendl(s[k++]);
+		p++;
+		ft_putchar('\n');
+	}
+	ft_strdel(s);
+	return (1);
+}
+
 int		ft_fst(char **st, char **dir)
 {
 	int		p;
@@ -109,7 +125,6 @@ int		ft_disp_l(char **st, char **dir)
 	int		p;
 	int		k;
 	int		dc;
-	char	**s;
 
 	if (!st)
 		return (0);
@@ -122,21 +137,18 @@ int		ft_disp_l(char **st, char **dir)
 	p = 0;
 	while (p < dc && st[p])
 	{
-		s = ft_strsplit(st[p],'`');
-		if (s[6][0] != '.')
+		k = 0;
+		while (st[p][k])
 		{
-			k = 0;
-			while (s[k])
-			{
-				ft_putstr(s[k++]);
-				if (k <= 6)
-					ft_putchar(' ');
-			}
-			ft_putchar('\n');
+			if (st[p][k] != '`')
+				ft_putchar(st[p][k]);
+			else
+				ft_putchar(' ');
+			k++;
 		}
+		ft_putchar('\n');
 		p++;
 	}
-	ft_strdel(s);
 	return (1);
 }
 
@@ -163,6 +175,12 @@ int		ft_content_display(char **str, char **dir, int k)
 	if (k == 4)
 	{
 		if (ft_disp_r(str, dir) != 1)
+			return (0);
+		return (1);
+	}
+	if (k == 5)
+	{
+		if (ft_disp_R(str, dir) != 1)
 			return (0);
 		return (1);
 	}
